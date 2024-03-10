@@ -31,11 +31,47 @@ variable "vpc_name" {
   description = "VPC network & subnet name"
 }
 
+###VM vars
+variable "vm_web_image_family" {
+  type        = string
+  description = "Family of the image"
+  default     = "ubuntu-2004-lts"
+}
+
+variable "vm_web_platform_id" {
+  type        = string
+  description = "Platform ID for VM"
+  default     = "standard-v1"
+}
+
+variable "vm_web_cores" {
+  type        = number
+  description = "Number of cores for VM"
+  default     = 2
+}
+
+variable "vm_web_memory" {
+  type        = number
+  description = "Amount of memory for VM"
+  default     = 1
+}
+
+variable "vm_web_core_fraction" {
+  type        = number
+  description = "Core fraction for VM"
+  default     = 5
+}
+
+variable "vm_web_preemptible" {
+  type        = bool
+  description = "Whether VM is preemptible or not"
+  default     = true
+}
 
 ###ssh vars
 
 variable "vms_ssh_root_key" {
   type        = string
-  default     = "<your_ssh_ed25519_key>"
+  default     = "ssh-ed25519 AAAAC3Nza nerogen@MacBook-Pro-Gleb.local"
   description = "ssh-keygen -t ed25519"
 }
