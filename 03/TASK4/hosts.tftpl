@@ -1,20 +1,14 @@
 [webservers]
-
-%{~ for i in webservers ~}
-
-${i["name"]}   ansible_host=${i["network_interface"][0]["nat_ip_address"]} fqdn=${i.id}.auto.internal
-%{~ endfor ~}
+%{ for instance in webservers ~}
+${instance.name} ansible_host=${instance.nat_ip_address} fqdn=${instance.id}.auto.internal
+%{ endfor ~}
 
 [dbservers]
+%{ for instance in dbservers ~}
+${instance.name} ansible_host=${instance.nat_ip_address} fqdn=${instance.id}.auto.internal
+%{ endfor ~}
 
-%{~ for i in dbservers ~}
-
-${i["name"]}   ansible_host=${i["network_interface"][0]["nat_ip_address"]} fqdn=${i.id}.auto.internal
-%{~ endfor ~}
-
-[storage]
-
-%{~ for i in storages ~}
-
-${i["name"]}   ansible_host=${i["network_interface"][0]["nat_ip_address"]} fqdn=${i.id}.auto.internal
-%{~ endfor ~}
+[storages]
+%{ for instance in storages ~}
+${instance.name} ansible_host=${instance.nat_ip_address} fqdn=${instance.id}.auto.internal
+%{ endfor ~}

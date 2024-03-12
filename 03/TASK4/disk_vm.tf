@@ -6,8 +6,7 @@ resource "yandex_compute_disk" "example_disk" {
   zone = var.default_zone
 }
 resource "yandex_compute_instance" "vm_storage" {
-  count       = 1 //необходимо передавать коллекции для пересчета для inventory.ini
-  name        = "storage-${count.index + 1}"   # Storage 1
+  name        = "storage-1"   # Storage 1
   folder_id   = var.folder_id
   zone        = var.default_zone
   platform_id = var.platform_id
