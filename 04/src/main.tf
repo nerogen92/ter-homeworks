@@ -1,3 +1,4 @@
+#Задание 7
 data "vault_generic_secret" "vault_example"{
  path = "secret/example"
 }
@@ -6,7 +7,15 @@ output "vault_example" {
  value = "${nonsensitive(data.vault_generic_secret.vault_example.data)}"
 } 
 
-
+resource "vault_generic_secret" "example_secret" {
+  path = "secret/sample_secret_nerogen"  # Путь, по которому будет сохранен секрет в Vault
+  data_json = <<EOT
+  {
+    "username": "nerogen",
+    "password": "very_hardpassword"
+  }
+  EOT
+}
 
 
 #Задание 6
