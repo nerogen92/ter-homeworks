@@ -34,3 +34,9 @@ provider "yandex" {
   folder_id = var.folder_id
   zone      = var.default_zone
 }
+provider "vault" {
+  address         = "http://172.31.1.192:8200"
+  skip_tls_verify = true
+  token           = "education"
+  # checkov:skip=CKV_SECRET_6: education
+}

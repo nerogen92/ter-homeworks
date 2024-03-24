@@ -1,34 +1,45 @@
-#Задание 6
-//прописаны в personal.auto.tfvars
-variable "existing_account_id" {
-  type = string
-}
-variable "existing_account_access_key" {
-  type = string
-}
-variable "existing_account_secret_key" {
-  type = string
+data "vault_generic_secret" "vault_example"{
+ path = "secret/example"
 }
 
-module "s3_bucket" {
- folder_id = var.folder_id 
- source = "git::https://github.com/terraform-yc-modules/terraform-yc-s3.git?ref=master"
- bucket_name = "my-example"
- storage_admin_service_account = {
-    //name                        = "s3 admin"
-    existing_account_id         = var.existing_account_id
-    existing_account_access_key = var.existing_account_access_key
-    existing_account_secret_key = var.existing_account_secret_key
-  }
- max_size = 1073741824 //1 Гб
- policy_console = {
-   enabled = true
-}
- policy = {
-    enabled = false
-  }
-  default_storage_class = "STANDARD"
-}
+output "vault_example" {
+ value = "${nonsensitive(data.vault_generic_secret.vault_example.data)}"
+} 
+
+
+
+
+#Задание 6
+# //прописаны в personal.auto.tfvars
+# variable "existing_account_id" {
+#   type = string
+# }
+# variable "existing_account_access_key" {
+#   type = string
+# }
+# variable "existing_account_secret_key" {
+#   type = string
+# }
+
+# module "s3_bucket" {
+#  folder_id = var.folder_id 
+#  source = "git::https://github.com/terraform-yc-modules/terraform-yc-s3.git?ref=master"
+#  bucket_name = "my-example"
+#  storage_admin_service_account = {
+#     //name                        = "s3 admin"
+#     existing_account_id         = var.existing_account_id
+#     existing_account_access_key = var.existing_account_access_key
+#     existing_account_secret_key = var.existing_account_secret_key
+#   }
+#  max_size = 1073741824 //1 Гб
+#  policy_console = {
+#    enabled = true
+# }
+#  policy = {
+#     enabled = false
+#   }
+#   default_storage_class = "STANDARD"
+# }
 
 /*
 
